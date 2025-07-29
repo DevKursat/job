@@ -51,7 +51,7 @@ const HomePage: NextPage = () => {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.3, ease: easeOut }}
             className="text-xl md:text-2xl text-gray-300 mb-8"
           >
             Sadece bir freelancer değil, projenizin başarı ortağı.
