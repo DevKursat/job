@@ -1,103 +1,188 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { motion } from 'framer-motion';
+
+const HomePage: NextPage = () => {
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeInOut' },
+    },
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col">
+      <Head>
+        <title>Kürşat Yılmaz - Proje Başarı Ortağınız</title>
+        <meta name="description" content="Yazılım projelerinizde %100 başarı garantisi. Sadece bir freelancer değil, projenizin başarı ortağı." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <header className="container mx-auto px-6 py-4 sticky top-0 bg-gray-900/80 backdrop-blur-sm z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Kürşat Yılmaz</h1>
+          <nav>
+            <a href="#services" className="px-4 hover:text-blue-400 transition-colors">Hizmetler</a>
+            <a href="#case-studies" className="px-4 hover:text-blue-400 transition-colors">Projeler</a>
+            <a href="#testimonials" className="px-4 hover:text-blue-400 transition-colors">Yorumlar</a>
+            <a href="#contact" className="ml-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300">İletişime Geç</a>
+          </nav>
+        </div>
+      </header>
+
+      <main 
+        className="flex-grow flex items-center justify-center text-center relative overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}
+      >
+         <div className="absolute top-0 left-0 w-full h-full bg-black/60"></div>
+        <div className="container mx-auto px-6 z-10">
+          <motion.h2 
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Yazılım Projelerinizde %100 Başarı.
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            className="text-xl md:text-2xl text-gray-300 mb-8"
           >
-            Read our docs
-          </a>
+            Sadece bir freelancer değil, projenizin başarı ortağı.
+          </motion.p>
+          <motion.a 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 150, delay: 0.6 }}
+            href="#contact" 
+            className="bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300"
+          >
+            15 Dakikalık Ücretsiz Proje Değerlendirmesi Planla
+          </motion.a>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <motion.section 
+        id="services" 
+        className="py-20 bg-gray-800"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="container mx-auto px-6 text-center">
+          <h3 className="text-4xl font-bold mb-12">Sizin Sorunlarınız, Benim Çözümlerim</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300" whileHover={{ scale: 1.05 }}>
+              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <h4 className="text-2xl font-bold mb-2">Geciken Projeler</h4>
+              <p className="text-gray-400">Net teslim tarihleri ve düzenli ilerleme raporları ile projenizin zamanında teslim edilmesini sağlarım.</p>
+            </motion.div>
+            <motion.div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300" whileHover={{ scale: 1.05 }}>
+              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+              <h4 className="text-2xl font-bold mb-2">Kötü İletişim</h4>
+              <p className="text-gray-400">Projenin her aşamasında proaktif ve şeffaf iletişim kurarak sizi sürekli bilgilendiririm.</p>
+            </motion.div>
+            <motion.div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300" whileHover={{ scale: 1.05 }}>
+              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+              <h4 className="text-2xl font-bold mb-2">Düşük Kaliteli Kod</h4>
+              <p className="text-gray-400">Genişletilebilir, temiz ve test edilmiş kod yazarak gelecekteki baş ağrılarını önlerim.</p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        id="case-studies" 
+        className="py-20"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="container mx-auto px-6 text-center">
+          <h3 className="text-4xl font-bold mb-12">Başarı Hikayeleri</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="bg-gray-800 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+              <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="E-commerce Project" className="w-full h-64 object-cover"/>
+              <div className="p-8 text-left">
+                <h4 className="text-2xl font-bold mb-3">E-Ticaret Platformu Optimizasyonu</h4>
+                <p className="text-gray-400 mb-6"><b>Sorun:</b> Yavaş yüklenen, dönüşüm oranı düşük bir site.</p>
+                <p className="text-gray-400 mb-6"><b>Çözüm:</b> Kapsamlı performans iyileştirmeleri ve kod optimizasyonu.</p>
+                <p className="text-blue-400 font-bold"><b>Sonuç:</b> Sayfa yüklenme süresi %60 azaldı, satışlar %25 arttı.</p>
+              </div>
+            </div>
+            <div className="bg-gray-800 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+              <img src="https://images.unsplash.com/photo-1601597111158-2f9e2d40d122?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mobile Banking App" className="w-full h-64 object-cover"/>
+              <div className="p-8 text-left">
+                <h4 className="text-2xl font-bold mb-3">Mobil Bankacılık Uygulaması</h4>
+                <p className="text-gray-400 mb-6"><b>Sorun:</b> Kullanıcı dostu olmayan, sık çöken bir uygulama.</p>
+                <p className="text-gray-400 mb-6"><b>Çözüm:</b> Modern arayüzle yeniden tasarım ve altyapı güçlendirmesi.</p>
+                <p className="text-blue-400 font-bold"><b>Sonuç:</b> Kullanıcı memnuniyeti %40 arttı, çökme oranı %95 azaldı.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        id="testimonials" 
+        className="py-20 bg-gray-800"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="container mx-auto px-6 text-center">
+          <h3 className="text-4xl font-bold mb-12">Müşterilerim Ne Diyor?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             <div className="bg-gray-700 p-8 rounded-lg">
+                <p className="text-lg italic text-gray-400 mb-6">“Kürşat, projemizi beklentilerimizin çok ötesine taşıdı. İletişimi ve profesyonelliği sayesinde süreç boyunca kendimizi güvende hissettik.”</p>
+                <p className="text-white font-bold text-lg">Ahmet Çelik</p>
+                <p className="text-blue-400">CEO, Teknoloji A.Ş.</p>
+            </div>
+            <div className="bg-gray-700 p-8 rounded-lg">
+                <p className="text-lg italic text-gray-400 mb-6">“Teknik bilgisi ve sorunlara yaklaşımı birinci sınıf. Karmaşık bir problemi, bizim bile anlayacağımız basitlikte çözdü. Kesinlikle tekrar çalışacağız.”</p>
+                <p className="text-white font-bold text-lg">Elif Kaya</p>
+                <p className="text-blue-400">Ürün Müdürü, FinTech Bank</p>
+            </div>
+            <div className="bg-gray-700 p-8 rounded-lg">
+                <p className="text-lg italic text-gray-400 mb-6">“Piyasada birçok geliştirici var ama Kürşat gibi işi sahiplenen ve projenin başarısını kendi başarısı gibi gören birini bulmak zor. Harika bir iş çıkardı.”</p>
+                <p className="text-white font-bold text-lg">Mehmet Öztürk</p>
+                <p className="text-blue-400">Kurucu, Hızlı Kargo</p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        id="contact" 
+        className="py-20"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="container mx-auto px-6 text-center">
+          <h3 className="text-4xl font-bold mb-4">Projenizi Hayata Geçirelim</h3>
+          <p className="text-gray-400 mb-8 text-xl">Aklınızdaki projeyi ve hedeflerinizi konuşmak için 15 dakikalık ücretsiz bir görüşme ayarlayalım.</p>
+          <a href="mailto:kursat.yilmaz@email.com" className="bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300">
+            Ücretsiz Görüşme Ayarla
+          </a>
+        </div>
+      </motion.section>
+
+      <footer className="bg-gray-900 text-center py-6">
+        <p>&copy; {new Date().getFullYear()} Kürşat Yılmaz. Tüm hakları saklıdır.</p>
       </footer>
     </div>
   );
-}
+};
+
+export default HomePage;
