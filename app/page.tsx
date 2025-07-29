@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 
 const HomePage: NextPage = () => {
+  // Trigger a new build on GitHub Actions
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
