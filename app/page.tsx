@@ -1,153 +1,140 @@
 'use client';
 
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import { motion } from 'framer-motion';
 
-const HomePage: NextPage = () => {
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+export default function Home() {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col">
-      <Head>
-        <title>Kürşat Yılmaz - Proje Başarı Ortağınız</title>
-        <meta name="description" content="Yazılım projelerinizde %100 başarı garantisi. Sadece bir freelancer değil, projenizin başarı ortağı." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <header className="container mx-auto px-6 py-4 sticky top-0 bg-gray-900/80 backdrop-blur-sm z-10">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Kürşat Yılmaz</h1>
-          <nav>
-            <a href="#services" className="px-4 hover:text-blue-400 transition-colors">Hizmetler</a>
-            <a href="#case-studies" className="px-4 hover:text-blue-400 transition-colors">Projeler</a>
-            <a href="#testimonials" className="px-4 hover:text-blue-400 transition-colors">Yorumlar</a>
-            <a href="#contact" className="ml-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300">İletişime Geç</a>
-          </nav>
-        </div>
-      </header>
-
-      <main 
-        className="flex-grow flex items-center justify-center text-center relative overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}
+    <div className="min-h-screen bg-gray-900 text-white font-sans">
+      {/* Hero Section */}
+      <motion.section
+        className="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-purple-600 to-blue-500"
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
       >
-         <div className="absolute top-0 left-0 w-full h-full bg-black/60"></div>
-        <div className="container mx-auto px-6 z-10">
-          <h2 
-            className="text-5xl md:text-7xl font-extrabold leading-tight mb-4"
+        <div className="z-10 p-8 bg-black bg-opacity-50 rounded-lg shadow-lg max-w-3xl mx-auto">
+          <motion.h1
+            className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight"
+            variants={itemVariants}
           >
-            Yazılım Projelerinizde %100 Başarı.
-          </h2>
-          <p 
-            className="text-xl md:text-2xl text-gray-300 mb-8"
+            Yazılım Kariyerinizde <span className="text-yellow-300">Yeni Bir Başlangıç</span>
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-2xl mb-8 text-gray-200"
+            variants={itemVariants}
           >
-            Sadece bir freelancer değil, projenizin başarı ortağı.
-          </p>
-          <a 
-            href="#contact" 
-            className="bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300"
+            Hayalinizdeki işe ulaşmanız için size %100 güven veren modern ve etkileyici bir portföy sitesi tasarlıyoruz.
+          </motion.p>
+          <motion.button
+            className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-yellow-300 transition-colors duration-300 shadow-lg"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            15 Dakikalık Ücretsiz Proje Değerlendirmesi Planla
-          </a>
+            Hemen Başlayın
+          </motion.button>
         </div>
-      </main>
-
-      <section 
-        id="services" 
-        className="py-20 bg-gray-800"
-      >
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-4xl font-bold mb-12">Sizin Sorunlarınız, Benim Çözümlerim</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
-              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <h4 className="text-2xl font-bold mb-2">Geciken Projeler</h4>
-              <p className="text-gray-400">Net teslim tarihleri ve düzenli ilerleme raporları ile projenizin zamanında teslim edilmesini sağlarım.</p>
-            </div>
-            <div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
-              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-              <h4 className="text-2xl font-bold mb-2">Kötü İletişim</h4>
-              <p className="text-gray-400">Projenin her aşamasında proaktif ve şeffaf iletişim kurarak sizi sürekli bilgilendiririm.</p>
-            </div>
-            <div className="bg-gray-700 p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
-              <svg className="w-20 h-20 mx-auto mb-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-              <h4 className="text-2xl font-bold mb-2">Düşük Kaliteli Kod</h4>
-              <p className="text-gray-400">Genişletilebilir, temiz ve test edilmiş kod yazarak gelecekteki baş ağrılarını önlerim.</p>
-            </div>
-          </div>
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Simple animated background elements */}
+          <motion.div
+            className="absolute w-48 h-48 bg-white bg-opacity-10 rounded-full -top-10 -left-10"
+            animate={{ x: 100, y: 100, rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute w-64 h-64 bg-white bg-opacity-10 rounded-full -bottom-20 -right-20"
+            animate={{ x: -100, y: -100, rotate: -360 }}
+            transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
+          />
         </div>
-      </section>
+      </motion.section>
 
-      <section 
-        id="case-studies" 
-        className="py-20"
+      {/* About Section */}
+      <motion.section
+        className="py-20 px-8 bg-gray-800 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
       >
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-4xl font-bold mb-12">Başarı Hikayeleri</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-gray-800 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-              <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="E-commerce Project" className="w-full h-64 object-cover"/>
-              <div className="p-8 text-left">
-                <h4 className="text-2xl font-bold mb-3">E-Ticaret Platformu Optimizasyonu</h4>
-                <p className="text-gray-400 mb-6"><b>Sorun:</b> Yavaş yüklenen, dönüşüm oranı düşük bir site.</p>
-                <p className="text-gray-400 mb-6"><b>Çözüm:</b> Kapsamlı performans iyileştirmeleri ve kod optimizasyonu.</p>
-                <p className="text-blue-400 font-bold"><b>Sonuç:</b> Sayfa yüklenme süresi %60 azaldı, satışlar %25 arttı.</p>
+        <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
+          Hakkımızda
+        </motion.h2>
+        <motion.p className="text-lg max-w-3xl mx-auto text-gray-300" variants={itemVariants}>
+          Yazılım dünyasında fark yaratmak isteyen profesyoneller için özel olarak tasarlanmış portföy siteleri geliştiriyoruz. Deneyiminizi, becerilerinizi ve projelerinizi en etkileyici şekilde sunarak işverenlerin dikkatini çekmenizi sağlıyoruz. Amacımız, sizin için en iyi iş fırsatlarını yaratmaktır.
+        </motion.p>
+      </motion.section>
+
+      {/* Portfolio Section */}
+      <motion.section
+        className="py-20 px-8 bg-gray-900"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
+        <motion.h2 className="text-4xl font-bold text-center mb-12" variants={itemVariants}>
+          Öne Çıkan Projelerimiz
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div className="h-48 bg-gray-700 flex items-center justify-center text-gray-400 text-2xl font-bold">
+                Proje {i} Görseli
               </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-              <img src="https://images.unsplash.com/photo-1601597111158-2f9e2d40d122?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mobile Banking App" className="w-full h-64 object-cover"/>
-              <div className="p-8 text-left">
-                <h4 className="text-2xl font-bold mb-3">Mobil Bankacılık Uygulaması</h4>
-                <p className="text-gray-400 mb-6"><b>Sorun:</b> Kullanıcı dostu olmayan, sık çöken bir uygulama.</p>
-                <p className="text-gray-400 mb-6"><b>Çözüm:</b> Modern arayüzle yeniden tasarım ve altyapı güçlendirmesi.</p>
-                <p className="text-blue-400 font-bold"><b>Sonuç:</b> Kullanıcı memnuniyeti %40 arttı, çökme oranı %95 azaldı.</p>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Proje Adı {i}</h3>
+                <p className="text-gray-300 mb-4">
+                  Bu proje, [teknoloji 1], [teknoloji 2] ve [teknoloji 3] kullanılarak geliştirilmiştir. Detaylı açıklama burada yer alacak.
+                </p>
+                <a href="#" className="text-yellow-400 hover:underline">
+                  Detayları Gör &rarr;
+                </a>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section 
-        id="testimonials" 
-        className="py-20 bg-gray-800"
+      {/* Contact Section */}
+      <motion.section
+        className="py-20 px-8 bg-gray-800 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
       >
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-4xl font-bold mb-12">Müşterilerim Ne Diyor?</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-             <div className="bg-gray-700 p-8 rounded-lg">
-                <p className="text-lg italic text-gray-400 mb-6">“Kürşat, projemizi beklentilerimizin çok ötesine taşıdı. İletişimi ve profesyonelliği sayesinde süreç boyunca kendimizi güvende hissettik.”</p>
-                <p className="text-white font-bold text-lg">Ahmet Çelik</p>
-                <p className="text-blue-400">CEO, Teknoloji A.Ş.</p>
-            </div>
-            <div className="bg-gray-700 p-8 rounded-lg">
-                <p className="text-lg italic text-gray-400 mb-6">“Teknik bilgisi ve sorunlara yaklaşımı birinci sınıf. Karmaşık bir problemi, bizim bile anlayacağımız basitlikte çözdü. Kesinlikle tekrar çalışacağız.”</p>
-                <p className="text-white font-bold text-lg">Elif Kaya</p>
-                <p className="text-blue-400">Ürün Müdürü, FinTech Bank</p>
-            </div>
-            <div className="bg-gray-700 p-8 rounded-lg">
-                <p className="text-lg italic text-gray-400 mb-6">“Piyasada birçok geliştirici var ama Kürşat gibi işi sahiplenen ve projenin başarısını kendi başarısı gibi gören birini bulmak zor. Harika bir iş çıkardı.”</p>
-                <p className="text-white font-bold text-lg">Mehmet Öztürk</p>
-                <p className="text-blue-400">Kurucu, Hızlı Kargo</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
+          Bize Ulaşın
+        </motion.h2>
+        <motion.p className="text-lg max-w-3xl mx-auto text-gray-300 mb-8" variants={itemVariants}>
+          Hayalinizdeki işe bir adım daha yaklaşmak için bizimle iletişime geçin. Size özel bir portföy sitesi oluşturmak için sabırsızlanıyoruz!
+        </motion.p>
+        <motion.div variants={itemVariants}>
+          <p className="text-xl mb-2">Email: info@example.com</p>
+          <p className="text-xl">Telefon: +90 555 123 45 67</p>
+        </motion.div>
+      </motion.section>
 
-      <section 
-        id="contact" 
-        className="py-20"
-      >
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-4xl font-bold mb-4">Projenizi Hayata Geçirelim</h3>
-          <p className="text-gray-400 mb-8 text-xl">Aklınızdaki projeyi ve hedeflerinizi konuşmak için 15 dakikalık ücretsiz bir görüşme ayarlayalım.</p>
-          <a href="mailto:kursat.yilmaz@email.com" className="bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 duration-300">
-            Ücretsiz Görüşme Ayarla
-          </a>
-        </div>
-      </section>
-
-      <footer className="bg-gray-900 text-center py-6">
-        <p>&copy; {new Date().getFullYear()} Kürşat Yılmaz. Tüm hakları saklıdır.</p>
+      {/* Footer */}
+      <footer className="py-8 bg-gray-950 text-center text-gray-500 text-sm">
+        <p>&copy; {new Date().getFullYear()} Yazılım Kariyeri. Tüm Hakları Saklıdır.</p>
       </footer>
     </div>
   );
-};
-
-export default HomePage;
+}
