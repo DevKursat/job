@@ -2,7 +2,7 @@
 
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
+import { motion, easeInOut, easeOut } from 'framer-motion';
 
 const HomePage: NextPage = () => {
   const sectionVariants = {
@@ -10,7 +10,7 @@ const HomePage: NextPage = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeInOut' },
+      transition: { duration: 0.6, ease: easeInOut },
     },
   };
 
@@ -43,7 +43,7 @@ const HomePage: NextPage = () => {
           <motion.h2 
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: easeOut }}
             className="text-5xl md:text-7xl font-extrabold leading-tight mb-4"
           >
             Yazılım Projelerinizde %100 Başarı.
