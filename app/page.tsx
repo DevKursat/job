@@ -426,6 +426,7 @@ export default function Home() {
         <div className="relative max-w-2xl mx-auto">
           <AnimatePresence mode="wait">
             <div className="relative max-w-2xl mx-auto">
+          <div className="relative max-w-2xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentTestimonial}
@@ -449,19 +450,9 @@ export default function Home() {
             </motion.div>
           </AnimatePresence>
         </div>
+        </div>
           </AnimatePresence>
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
+          
         </div>
         <div className="flex justify-center mt-8 space-x-4">
           {testimonials.map((_, idx) => (
