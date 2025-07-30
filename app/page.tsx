@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 
 const sectionVariants = {
@@ -87,6 +87,8 @@ export default function Home() {
   const [currentRotatingText, setCurrentRotatingText] = useState(0);
 
   const heroRef = useRef(null);
+  const servicesRef = useRef(null);
+  const servicesInView = useInView(servicesRef, { once: true, amount: 0.3 });
 
   useEffect(() => {
     const testimonialTimer = setInterval(() => {
@@ -170,6 +172,30 @@ export default function Home() {
     };
   }, []);
 
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const nextService = () => {
+    setCurrentService((prev) => (prev + 1) % services.length);
+  };
+
+  const prevService = () => {
+    setCurrentService((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white font-sans relative">
       {/* Matrix Background */}
@@ -178,21 +204,26 @@ export default function Home() {
       </div>
 
       {/* Sticky CTA Button */}
-      <motion.a
-        href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-turquoise-500 text-gray-900 p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-turquoise-600 transition-colors duration-300"
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 2 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12.04 2C7.34 2 3.41 5.93 3.41 10.63c0 1.98.65 3.83 1.77 5.34L3 21.01l5.25-1.38c1.45.79 3.08 1.21 4.59 1.21 4.7 0 8.63-3.93 8.63-8.63C20.67 5.93 16.74 2 12.04 2zM17.5 14.3c-.2-.1-.8-.4-1.1-.5s-.6-.1-.8.1c-.2.2-.3.2-.6.3s-.6.1-.8-.1c-.2-.2-.7-.4-1.3-.8s-1-.9-1.4-1.5c-.4-.6-.8-1.2-.9-1.4s0-.4.1-.6c.1-.2.2-.4.3-.5s.2-.2.3-.4c.1-.2 0-.4 0-.5s-.8-2-.9-2.4c-.1-.4-.2-.3-.4-.3h-.5c-.2 0-.5.1-.8.3s-1.1 1.1-1.1 2.7c0 1.6 1.1 3.1 1.3 3.3s2.1 3.2 5.1 4.5c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.3-.5 1.5-.9s.3-.7.2-1.2c-.1-.5-.2-.8-.4-.9z"/>
-        </svg>
-      </motion.a>
+      <AnimatePresence>
+        {servicesInView && (
+          <motion.a
+            href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-6 right-6 bg-turquoise-500 text-gray-900 p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-turquoise-600 transition-colors duration-300"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 100, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.04 2C7.34 2 3.41 5.93 3.41 10.63c0 1.98.65 3.83 1.77 5.34L3 21.01l5.25-1.38c1.45.79 3.08 1.21 4.59 1.21 4.7 0 8.63-3.93 8.63-8.63C20.67 5.93 16.74 2 12.04 2zM17.5 14.3c-.2-.1-.8-.4-1.1-.5s-.6-.1-.8.1c-.2.2-.3.2-.6.3s-.6.1-.8-.1c-.2-.2-.7-.4-1.3-.8s-1-.9-1.4-1.5c-.4-.6-.8-1.2-.9-1.4s0-.4.1-.6c.1-.2.2-.4.3-.5s.2-.2.3-.4c.1-.2 0-.4 0-.5s-.8-2-.9-2.4c-.1-.4-.2-.3-.4-.3h-.5c-.2 0-.5.1-.8.3s-1.1 1.1-1.1 2.7c0 1.6 1.1 3.1 1.3 3.3s2.1 3.2 5.1 4.5c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.3-.5 1.5-.9s.3-.7.2-1.2c-.1-.5-.2-.8-.4-.9z"/>
+            </svg>
+          </motion.a>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <motion.section
@@ -244,10 +275,25 @@ export default function Home() {
             Hemen Projeni Başlat
           </motion.a>
         </div>
+        {/* Scroll Down Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-400"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+          <span className="text-sm">Aşağı Kaydır</span>
+        </motion.div>
       </motion.section>
+
+      
 
       {/* Service Cards Slider */}
       <motion.section
+        ref={servicesRef}
         className="py-20 px-8 bg-gray-900 text-center z-10 relative"
         initial="hidden"
         whileInView="visible"
@@ -257,19 +303,33 @@ export default function Home() {
         <motion.h2 className="text-4xl font-bold mb-12" variants={itemVariants}>
           Sunduğum Hizmetler
         </motion.h2>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentService}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg"
+        <div className="relative max-w-md mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentService}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+              className="p-6 bg-gray-800 rounded-lg shadow-lg"
+            >
+              <h3 className="text-2xl font-bold mb-2">{services[currentService].title}</h3>
+              <p className="text-gray-300">{services[currentService].description}</p>
+            </motion.div>
+          </AnimatePresence>
+          <button
+            onClick={prevService}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
           >
-            <h3 className="text-2xl font-bold mb-2">{services[currentService].title}</h3>
-            <p className="text-gray-300">{services[currentService].description}</p>
-          </motion.div>
-        </AnimatePresence>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button
+            onClick={nextService}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
         <div className="flex justify-center mt-8 space-x-4">
           {services.map((_, idx) => (
             <button
@@ -292,29 +352,43 @@ export default function Home() {
         <motion.h2 className="text-4xl font-bold text-center mb-12" variants={itemVariants}>
           Öne Çıkan Projelerimi Sunuyorum
         </motion.h2>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentProject}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto bg-gray-700 rounded-lg shadow-xl overflow-hidden"
+        <div className="relative max-w-3xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentProject}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gray-700 rounded-lg shadow-xl overflow-hidden"
+            >
+              <div className="h-64 bg-gray-600 flex items-center justify-center text-gray-400 text-2xl font-bold">
+                <img src={projects[currentProject].image} alt={projects[currentProject].name} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">{projects[currentProject].name}</h3>
+                <p className="text-gray-300 mb-4">
+                  {projects[currentProject].description}
+                </p>
+                <a href={projects[currentProject].link} className="text-turquoise-400 hover:underline">
+                  Detayları Görüntülüyorum &rarr;
+                </a>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          <button
+            onClick={prevProject}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
           >
-            <div className="h-64 bg-gray-600 flex items-center justify-center text-gray-400 text-2xl font-bold">
-              <img src={projects[currentProject].image} alt={projects[currentProject].name} className="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-2">{projects[currentProject].name}</h3>
-              <p className="text-gray-300 mb-4">
-                {projects[currentProject].description}
-              </p>
-              <a href={projects[currentProject].link} className="text-turquoise-400 hover:underline">
-                Detayları Görüntülüyorum &rarr;
-              </a>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button
+            onClick={nextProject}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
         <div className="flex justify-center mt-8 space-x-4">
           {projects.map((_, idx) => (
             <button
@@ -337,19 +411,33 @@ export default function Home() {
         <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
           Müşterilerim Benim Hakkımda Ne Söylüyor?
         </motion.h2>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentTestimonial}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto p-6 bg-gray-700 rounded-lg shadow-lg"
+        <div className="relative max-w-2xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentTestimonial}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="p-6 bg-gray-700 rounded-lg shadow-lg"
+            >
+              <p className="text-lg italic text-gray-200 mb-4">"{testimonials[currentTestimonial].text}"</p>
+              <p className="text-turquoise-400 font-bold">- {testimonials[currentTestimonial].author}</p>
+            </motion.div>
+          </AnimatePresence>
+          <button
+            onClick={prevTestimonial}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
           >
-            <p className="text-lg italic text-gray-200 mb-4">"{testimonials[currentTestimonial].text}"</p>
-            <p className="text-turquoise-400 font-bold">- {testimonials[currentTestimonial].author}</p>
-          </motion.div>
-        </AnimatePresence>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button
+            onClick={nextTestimonial}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
         <div className="flex justify-center mt-8 space-x-4">
           {testimonials.map((_, idx) => (
             <button
