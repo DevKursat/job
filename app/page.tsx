@@ -213,7 +213,7 @@ export default function Home() {
             className="fixed bottom-6 right-6 bg-turquoise-500 text-gray-900 p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-turquoise-600 transition-colors duration-300"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100, opacity: 0 }}
+            exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
