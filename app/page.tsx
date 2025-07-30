@@ -134,15 +134,15 @@ export default function Home() {
     }
 
     function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.08)"; // Slightly more opaque for better contrast
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx!.fillStyle = "rgba(0, 0, 0, 0.08)"; // Slightly more opaque for better contrast
+      ctx!.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#26c6da"; // Turquoise-400
-      ctx.font = font_size + "px arial";
+      ctx!.fillStyle = "#26c6da"; // Turquoise-400
+      ctx!.font = font_size + "px arial";
 
       for (let i = 0; i < drops.length; i++) {
         const text = matrix[Math.floor(Math.random() * matrix.length)];
-        ctx.fillText(text, i * font_size, drops[i] * font_size);
+        ctx!.fillText(text, i * font_size, drops[i] * font_size);
 
         if (drops[i] * font_size > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
