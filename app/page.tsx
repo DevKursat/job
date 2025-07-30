@@ -121,7 +121,7 @@ export default function Home() {
         href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 flex items-center justify-center text-lg font-bold hover:bg-green-600 transition-colors duration-300 animate-pulse"
+        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-green-700 transition-colors duration-300"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 2 }}
@@ -166,7 +166,7 @@ export default function Home() {
             className="text-xl md:text-2xl mb-8 text-gray-200"
             variants={itemVariants}
           >
-            İşinizi büyütmek için kusursuz dijital çözümler geliştiriyorum. Hemen projenizi başlatın!
+            İşinizi büyütmek için kusursuz dijital çözümler geliştiriyorum.
           </motion.p>
           <motion.a
             href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
