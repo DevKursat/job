@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -16,41 +16,41 @@ const itemVariants = {
 const testimonials = [
   {
     id: 1,
-    text: "Harika bir ekip! Web sitemizi kısa sürede ve beklediğimizden çok daha iyi bir kalitede teslim ettiler. Kesinlikle tavsiye ediyorum.",
-    author: "Memnun Müşteri 1",
+    text: "3 günde teslim etti, UI harikaydı.",
+    author: "Ahmet K.",
   },
   {
     id: 2,
-    text: "Uygun fiyata bu kadar profesyonel bir hizmet alacağımı düşünmezdim. İletişim harikaydı ve her adımda destek oldular.",
-    author: "Memnun Müşteri 2",
+    text: "Proje sürecinde iletişim çok güçlüydü, kesinlikle öneriyorum.",
+    author: "Merve Y.",
   },
   {
     id: 3,
-    text: "İşimi büyütmek için harika bir web sitesi inşa ettiler. Herkese öneriyorum, pişman olmazsınız!",
-    author: "Memnun Müşteri 3",
+    text: "İşimi büyütmek için harika bir web sitesi inşa etti. Herkese öneriyorum, pişman olmazsınız!",
+    author: "Ayşe D.",
   },
 ];
 
 const projects = [
   {
     id: 1,
-    name: "Kurumsal Web Sitesi Projesi",
-    description: "Şirketinizin dijital kimliğini en iyi şekilde yansıtan profesyonel siteler inşa ediyorum. Markanız için özel çözümler sunuyorum.",
-    image: "https://via.placeholder.com/400x200?text=Kurumsal+Site",
+    name: "Kürşat App",
+    description: "Türk dünyasına yönelik sosyal medya platformu inşa ettim – 50K+ aktif kullanıcıya ulaştırdım.",
+    image: "https://via.placeholder.com/600x400?text=Kürşat+App",
     link: "#",
   },
   {
     id: 2,
-    name: "E-Ticaret Platformu Geliştirme",
-    description: "Ürünlerinizi kolayca satabileceğiniz, güvenli ve kullanıcı dostu e-ticaret platformları teslim ediyorum. Satışlarınızı artırıyorum.",
-    image: "https://via.placeholder.com/400x200?text=E-Ticaret+Site",
+    name: "Lusid AI",
+    description: "Rüya ve günlük analizi yapan GPT destekli mobil uygulama geliştirdim. Yapay zeka gücünü parmaklarınızın ucuna getiriyorum.",
+    image: "https://via.placeholder.com/600x400?text=Lusid+AI",
     link: "#",
   },
   {
     id: 3,
-    name: "Kişisel Blog ve Portföy Oluşturma",
-    description: "Bireysel markanızı veya çalışmalarınızı sergileyeceğiniz etkileyici platformlar başlatıyorum. Kendinizi en iyi şekilde ifade edin.",
-    image: "https://via.placeholder.com/400x200?text=Blog+Portföy",
+    name: "Kurumsal B2B Proje",
+    description: "Önemli bir firmaya özel API ve mobil entegrasyon çözümleri teslim ettim. İş süreçlerini optimize ediyorum.",
+    image: "https://via.placeholder.com/600x400?text=Kurumsal+B2B",
     link: "#",
   },
 ];
@@ -58,6 +58,10 @@ const projects = [
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
+
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: heroRef });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]); // Parallax effect
 
   useEffect(() => {
     const testimonialTimer = setInterval(() => {
@@ -76,9 +80,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
-      {/* Sticky WhatsApp CTA Button */}
+      {/* Sticky CTA Button */}
       <motion.a
-        href="https://wa.me/905453809828?text=Merhaba,%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
+        href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 flex items-center justify-center text-lg font-bold hover:bg-green-600 transition-colors duration-300"
@@ -95,6 +99,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <motion.section
+        ref={heroRef}
         className="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-purple-600 to-blue-500 overflow-hidden"
         initial="hidden"
         animate="visible"
@@ -106,17 +111,18 @@ export default function Home() {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
+            style={{ y }}
           >
-            İşinizi Büyüten <span className="text-yellow-300">Web Çözümleri</span> İnşa Ediyorum
+            Web, Mobil & Yapay Zeka Projelerinizi <span className="text-yellow-300">3 Günde Teslim Ediyorum</span>
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl mb-8 text-gray-200"
             variants={itemVariants}
           >
-            Uygun fiyatlarla, işletmenize özel, modern ve etkileyici web siteleri tasarlıyorum. Dijital varlığınızı güçlendiriyorum!
+            İşinizi büyütmek için kusursuz dijital çözümler geliştiriyorum. Hemen projenizi başlatın!
           </motion.p>
           <motion.a
-            href="https://wa.me/905453809828?text=Merhaba,%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
+            href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-green-600 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
@@ -127,7 +133,7 @@ export default function Home() {
             <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12.04 2C7.34 2 3.41 5.93 3.41 10.63c0 1.98.65 3.83 1.77 5.34L3 21.01l5.25-1.38c1.45.79 3.08 1.21 4.59 1.21 4.7 0 8.63-3.93 8.63-8.63C20.67 5.93 16.74 2 12.04 2zM17.5 14.3c-.2-.1-.8-.4-1.1-.5s-.6-.1-.8.1c-.2.2-.3.2-.6.3s-.6.1-.8-.1c-.2-.2-.7-.4-1.3-.8s-1-.9-1.4-1.5c-.4-.6-.8-1.2-.9-1.4s0-.4.1-.6c.1-.2.2-.4.3-.5s.2-.2.3-.4c.1-.2 0-.4 0-.5s-.8-2-.9-2.4c-.1-.4-.2-.3-.4-.3h-.5c-.2 0-.5.1-.8.3s-1.1 1.1-1.1 2.7c0 1.6 1.1 3.1 1.3 3.3s2.1 3.2 5.1 4.5c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.3-.5 1.5-.9s.3-.7.2-1.2c-.1-.5-.2-.8-.4-.9z"/>
             </svg>
-            WhatsApp ile İletişime Geçin
+            Hemen Projeni Başlat
           </motion.a>
         </div>
         <div className="absolute inset-0 overflow-hidden">
@@ -145,7 +151,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Value Proposition Section */}
+      {/* About Section */}
       <motion.section
         className="py-20 px-8 bg-gray-800 text-center"
         initial="hidden"
@@ -154,51 +160,82 @@ export default function Home() {
         variants={sectionVariants}
       >
         <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
-          Neden Bizi Seçmelisiniz?
+          Hakkımda
+        </motion.h2>
+        <motion.div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8" variants={itemVariants}>
+          <div className="md:w-1/3">
+            <img
+              src="https://via.placeholder.com/200x200?text=Kürşat+Fotoğrafı"
+              alt="Kürşat'ın Fotoğrafı"
+              className="rounded-full w-48 h-48 object-cover mx-auto mb-4 md:mb-0"
+              loading="lazy"
+            />
+          </div>
+          <div className="md:w-2/3 text-left">
+            <p className="text-lg text-gray-300 mb-4">
+              Merhaba, ben Kürşat. 20 yaşında, tutkulu bir girişimci yazılımcıyım. Web, mobil ve yapay zeka projeleri geliştirerek işletmelerin dijital dönüşümünü hızlandırıyorum. Her projede yenilikçi çözümler sunuyor, müşteri memnuniyetini en üst seviyede tutuyorum.
+            </p>
+            <p className="text-lg text-gray-300">
+              Hızlı teslimat, uygun fiyat ve kusursuz kullanıcı deneyimi odaklı çalışıyorum. Projelerinizi hayata geçirmek için buradayım.
+            </p>
+          </div>
+        </motion.div>
+      </motion.section>
+
+      {/* Service Cards */}
+      <motion.section
+        className="py-20 px-8 bg-gray-900 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
+        <motion.h2 className="text-4xl font-bold mb-12" variants={itemVariants}>
+          Sunduğum Hizmetler
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           <motion.div
-            className="p-6 bg-gray-700 rounded-lg shadow-lg"
+            className="p-6 bg-gray-800 rounded-lg shadow-lg"
             variants={itemVariants}
-            whileHover={{ y: -10, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
             transition={{ duration: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-2">Uygun Fiyat Sunuyorum</h3>
-            <p className="text-gray-300">Bütçenizi zorlamadan kaliteli web çözümleri sağlıyorum.</p>
+            <h3 className="text-2xl font-bold mb-2">Mobil Uygulama Geliştiriyorum</h3>
+            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
           </motion.div>
           <motion.div
-            className="p-6 bg-gray-700 rounded-lg shadow-lg"
+            className="p-6 bg-gray-800 rounded-lg shadow-lg"
             variants={itemVariants}
-            whileHover={{ y: -10, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
             transition={{ duration: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-2">Hızlı Teslimat Yapıyorum</h3>
-            <p className="text-gray-300">Projelerinizi zamanında ve eksiksiz teslim ediyorum.</p>
+            <h3 className="text-2xl font-bold mb-2">Web Sitesi Tasarlıyorum</h3>
+            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
           </motion.div>
           <motion.div
-            className="p-6 bg-gray-700 rounded-lg shadow-lg"
+            className="p-6 bg-gray-800 rounded-lg shadow-lg"
             variants={itemVariants}
-            whileHover={{ y: -10, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
             transition={{ duration: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-2">Özel Çözümler Geliştiriyorum</h3>
-            <p className="text-gray-300">İhtiyaçlarınıza özel, özgün tasarımlar geliştiriyorum.</p>
+            <h3 className="text-2xl font-bold mb-2">Yapay Zeka Çözümleri Üretiyorum</h3>
+            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
           </motion.div>
           <motion.div
-            className="p-6 bg-gray-700 rounded-lg shadow-lg"
+            className="p-6 bg-gray-800 rounded-lg shadow-lg"
             variants={itemVariants}
-            whileHover={{ y: -10, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
             transition={{ duration: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-2">Uzman Destek Sağlıyorum</h3>
-            <p className="text-gray-300">Proje süresince ve sonrasında yanınızdayım.</p>
+            <h3 className="text-2xl font-bold mb-2">Otomasyon Sistemleri Kuruyorum</h3>
+            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
           </motion.div>
         </div>
       </motion.section>
 
       {/* Project Showcase Slider */}
       <motion.section
-        className="py-20 px-8 bg-gray-900"
+        className="py-20 px-8 bg-gray-800"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -214,10 +251,10 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+            className="max-w-3xl mx-auto bg-gray-700 rounded-lg shadow-xl overflow-hidden"
           >
-            <div className="h-64 bg-gray-700 flex items-center justify-center text-gray-400 text-2xl font-bold">
-              <img src={projects[currentProject].image} alt={projects[currentProject].name} className="w-full h-full object-cover" />
+            <div className="h-64 bg-gray-600 flex items-center justify-center text-gray-400 text-2xl font-bold">
+              <img src={projects[currentProject].image} alt={projects[currentProject].name} className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-2">{projects[currentProject].name}</h3>
@@ -230,11 +267,20 @@ export default function Home() {
             </div>
           </motion.div>
         </AnimatePresence>
+        <div className="flex justify-center mt-8 space-x-4">
+          {projects.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentProject(idx)}
+              className={`w-4 h-4 rounded-full ${currentProject === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+            />
+          ))}
+        </div>
       </motion.section>
 
       {/* Testimonials Section - Auto-rotate */}
       <motion.section
-        className="py-20 px-8 bg-gray-800 text-center"
+        className="py-20 px-8 bg-gray-900 text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -256,6 +302,15 @@ export default function Home() {
             <p className="text-yellow-400 font-bold">- {testimonials[currentTestimonial].author}</p>
           </motion.div>
         </AnimatePresence>
+        <div className="flex justify-center mt-8 space-x-4">
+          {testimonials.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentTestimonial(idx)}
+              className={`w-4 h-4 rounded-full ${currentTestimonial === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+            />
+          ))}
+        </div>
       </motion.section>
 
       {/* Call to Action for WhatsApp - Bottom */}
@@ -267,13 +322,13 @@ export default function Home() {
         variants={sectionVariants}
       >
         <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
-          Hemen Teklif Alın!
+          Hemen Projenizi Başlatın!
         </motion.h2>
         <motion.p className="text-lg max-w-3xl mx-auto text-gray-200 mb-8" variants={itemVariants}>
           Hayalinizdeki web sitesine uygun fiyatlarla sahip olmak için bana WhatsApp üzerinden ulaşın.
         </motion.p>
         <motion.a
-          href="https://wa.me/905453809828?text=Merhaba,%20uygun%20fiyatlı%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
+          href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
           target="_blank"
           rel="noopener noreferrer"
           className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-yellow-300 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
