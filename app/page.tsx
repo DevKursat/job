@@ -306,7 +306,7 @@ export default function Home() {
         </div>
         {/* Scroll Down Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400"
+          className="absolute bottom-8 left-0 right-0 mx-auto flex flex-col items-center text-gray-400 w-fit"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
@@ -344,18 +344,6 @@ export default function Home() {
               <p className="text-gray-300">{services[currentService].description}</p>
             </motion.div>
           </AnimatePresence>
-          <button
-            onClick={prevService}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          <button
-            onClick={nextService}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
         </div>
         <div className="flex justify-center mt-8 space-x-4">
           {services.map((_, idx) => (
@@ -380,8 +368,6 @@ export default function Home() {
           Öne Çıkan Projelerimi Sunuyorum
         </motion.h2>
         <div className="relative max-w-3xl mx-auto">
-          <AnimatePresence mode="wait">
-            <div className="relative max-w-3xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentProject}
@@ -414,20 +400,6 @@ export default function Home() {
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
-          </AnimatePresence>
-          <button
-            onClick={prevProject}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          <button
-            onClick={nextProject}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded-full text-white hover:bg-gray-600 transition-colors duration-300 z-20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
         </div>
         <div className="flex justify-center mt-8 space-x-4">
           {projects.map((_, idx) => (
