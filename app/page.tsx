@@ -55,13 +55,39 @@ const projects = [
   },
 ];
 
+const services = [
+  {
+    id: 1,
+    title: "Mobil Uygulama Geliştiriyorum",
+    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+  },
+  {
+    id: 2,
+    title: "Web Sitesi Tasarlıyorum",
+    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+  },
+  {
+    id: 3,
+    title: "Yapay Zeka Çözümleri Üretiyorum",
+    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+  },
+  {
+    id: 4,
+    title: "Otomasyon Sistemleri Kuruyorum",
+    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+  },
+];
+
+const rotatingTexts = ["Mobil", "Web", "Yapay Zeka"];
+
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
+  const [currentService, setCurrentService] = useState(0);
+  const [currentRotatingText, setCurrentRotatingText] = useState(0);
 
   const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]); // Parallax effect
+  // Parallax effect removed as per feedback
 
   useEffect(() => {
     const testimonialTimer = setInterval(() => {
@@ -72,9 +98,19 @@ export default function Home() {
       setCurrentProject((prev) => (prev + 1) % projects.length);
     }, 7000); // Change project every 7 seconds
 
+    const serviceTimer = setInterval(() => {
+      setCurrentService((prev) => (prev + 1) % services.length);
+    }, 6000); // Change service every 6 seconds
+
+    const rotatingTextTimer = setInterval(() => {
+      setCurrentRotatingText((prev) => (prev + 1) % rotatingTexts.length);
+    }, 3000); // Change text every 3 seconds
+
     return () => {
       clearInterval(testimonialTimer);
       clearInterval(projectTimer);
+      clearInterval(serviceTimer);
+      clearInterval(rotatingTextTimer);
     };
   }, []);
 
@@ -108,12 +144,23 @@ export default function Home() {
         <div className="z-10 p-8 bg-black bg-opacity-50 rounded-lg shadow-lg max-w-3xl mx-auto">
           <motion.h1
             className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight"
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-            style={{ y }}
           >
-            Mobil, Web & Yapay Zeka Projelerinizi <span className="text-yellow-300">3 Günde Teslim Ediyorum</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentRotatingText}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-yellow-300 inline-block"
+              >
+                {rotatingTexts[currentRotatingText]}
+              </motion.span>
+            </AnimatePresence>
+            <br />Projelerinizi 3 Günde Teslim Ediyorum
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl mb-8 text-gray-200"
@@ -182,7 +229,7 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* Service Cards */}
+      {/* Service Cards Slider */}
       <motion.section
         className="py-20 px-8 bg-gray-900 text-center"
         initial="hidden"
@@ -193,43 +240,27 @@ export default function Home() {
         <motion.h2 className="text-4xl font-bold mb-12" variants={itemVariants}>
           Sunduğum Hizmetler
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <AnimatePresence mode="wait">
           <motion.div
-            className="p-6 bg-gray-800 rounded-lg shadow-lg"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
-            transition={{ duration: 0.2 }}
+            key={currentService}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg"
           >
-            <h3 className="text-2xl font-bold mb-2">Mobil Uygulama Geliştiriyorum</h3>
-            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
+            <h3 className="text-2xl font-bold mb-2">{services[currentService].title}</h3>
+            <p className="text-gray-300">{services[currentService].description}</p>
           </motion.div>
-          <motion.div
-            className="p-6 bg-gray-800 rounded-lg shadow-lg"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
-            transition={{ duration: 0.2 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">Web Sitesi Tasarlıyorum</h3>
-            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
-          </motion.div>
-          <motion.div
-            className="p-6 bg-gray-800 rounded-lg shadow-lg"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
-            transition={{ duration: 0.2 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">Yapay Zeka Çözümleri Üretiyorum</h3>
-            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
-          </motion.div>
-          <motion.div
-            className="p-6 bg-gray-800 rounded-lg shadow-lg"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.4)" }}
-            transition={{ duration: 0.2 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">Otomasyon Sistemleri Kuruyorum</h3>
-            <p className="text-gray-300">7 günlük teslimat ve UI/UX desteği sağlıyorum.</p>
-          </motion.div>
+        </AnimatePresence>
+        <div className="flex justify-center mt-8 space-x-4">
+          {services.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentService(idx)}
+              className={`w-4 h-4 rounded-full ${currentService === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+            />
+          ))}
         </div>
       </motion.section>
 
