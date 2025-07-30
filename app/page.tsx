@@ -277,7 +277,7 @@ export default function Home() {
         </div>
         {/* Scroll Down Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full flex flex-col items-center text-gray-400"
+          className="absolute bottom-8 flex flex-col items-center text-gray-400 mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
