@@ -82,23 +82,28 @@ const projects = [
 const services = [
   {
     id: 1,
-    title: "Mobil Uygulama Geliştirme",
-    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+    title: "Kod Geliştirme ve Üretim",
+    description: "Web, mobil ve yapay zeka projeleriniz için sıfırdan kod yazıyor, mevcut kodları geliştiriyorum.",
   },
   {
     id: 2,
-    title: "Web Sitesi Tasarımı",
-    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+    title: "Hata Ayıklama ve Optimizasyon",
+    description: "Mevcut projelerinizdeki hataları tespit ediyor, performans iyileştirmeleri ve kod optimizasyonları yapıyorum.",
   },
   {
     id: 3,
-    title: "Yapay Zeka Çözümleri",
-    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+    title: "Refaktöring ve Mimari Tasarım",
+    description: "Kod tabanınızı yeniden yapılandırıyor, daha sürdürülebilir ve ölçeklenebilir mimariler tasarlıyorum.",
   },
   {
     id: 4,
-    title: "Otomasyon Sistemleri",
-    description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
+    title: "Test ve Kalite Güvencesi",
+    description: "Yazılımınızın kalitesini artırmak için kapsamlı test senaryoları oluşturuyor ve uyguluyorum.",
+  },
+  {
+    id: 5,
+    title: "Teknik Dokümantasyon",
+    description: "Projeleriniz için net ve anlaşılır teknik dokümantasyonlar hazırlıyor, süreçleri belgeliyorum.",
   },
 ];
 
