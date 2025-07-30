@@ -352,12 +352,15 @@ export default function Home() {
         </motion.h2>
         <div className="relative max-w-3xl mx-auto">
           <AnimatePresence mode="wait">
+            <div className="relative max-w-3xl mx-auto">
+          <AnimatePresence mode="wait">
             <motion.div
               key={currentProject}
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
+              className="bg-gray-700 rounded-lg shadow-xl overflow-hidden"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               onDragEnd={(event, info) => {
@@ -381,6 +384,8 @@ export default function Home() {
                 </a>
               </div>
             </motion.div>
+          </AnimatePresence>
+        </div>
           </AnimatePresence>
           <button
             onClick={prevProject}
@@ -419,12 +424,15 @@ export default function Home() {
         </motion.h2>
         <div className="relative max-w-2xl mx-auto">
           <AnimatePresence mode="wait">
+            <div className="relative max-w-2xl mx-auto">
+          <AnimatePresence mode="wait">
             <motion.div
               key={currentTestimonial}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
+              className="p-6 bg-gray-700 rounded-lg shadow-lg"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               onDragEnd={(event, info) => {
@@ -438,6 +446,8 @@ export default function Home() {
               <p className="text-lg italic text-gray-200 mb-4">"{testimonials[currentTestimonial].text}"</p>
               <p className="text-turquoise-400 font-bold">- {testimonials[currentTestimonial].author}</p>
             </motion.div>
+          </AnimatePresence>
+        </div>
           </AnimatePresence>
           <button
             onClick={prevTestimonial}
