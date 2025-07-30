@@ -277,7 +277,7 @@ export default function Home() {
         </div>
         {/* Scroll Down Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-400"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full flex flex-col items-center text-gray-400"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
@@ -288,8 +288,6 @@ export default function Home() {
           <span className="text-sm">Aşağı Kaydır</span>
         </motion.div>
       </motion.section>
-
-      
 
       {/* Service Cards Slider */}
       <motion.section
@@ -360,7 +358,15 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="bg-gray-700 rounded-lg shadow-xl overflow-hidden"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(event, info) => {
+                if (info.offset.x > 50) {
+                  prevProject();
+                } else if (info.offset.x < -50) {
+                  nextProject();
+                }
+              }}
             >
               <div className="h-64 bg-gray-600 flex items-center justify-center text-gray-400 text-2xl font-bold">
                 <img src={projects[currentProject].image} alt={projects[currentProject].name} className="w-full h-full object-cover" loading="lazy" />
@@ -419,7 +425,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="p-6 bg-gray-700 rounded-lg shadow-lg"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(event, info) => {
+                if (info.offset.x > 50) {
+                  prevTestimonial();
+                } else if (info.offset.x < -50) {
+                  nextTestimonial();
+                }
+              }}
             >
               <p className="text-lg italic text-gray-200 mb-4">"{testimonials[currentTestimonial].text}"</p>
               <p className="text-turquoise-400 font-bold">- {testimonials[currentTestimonial].author}</p>
