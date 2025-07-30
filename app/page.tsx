@@ -27,16 +27,16 @@ export default function Home() {
             className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight"
             variants={itemVariants}
           >
-            Uygun Fiyatlı Web Çözümleri <span className="text-yellow-300">Parmaklarınızın Ucunda</span>
+            İşinizi Büyüten <span className="text-yellow-300">Web Çözümleri</span>
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl mb-8 text-gray-200"
             variants={itemVariants}
           >
-            İşletmenizi dijital dünyada öne çıkaracak, bütçenize uygun ve etkileyici web siteleri tasarlıyoruz.
+            Uygun fiyatlarla, işletmenize özel, modern ve etkileyici web siteleri tasarlıyoruz. Dijital varlığınızı güçlendirin!
           </motion.p>
           <motion.a
-            href="https://wa.me/905551234567?text=Merhaba,%20uygun%20fiyatlı%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
+            href="https://wa.me/905453809828?text=Merhaba,%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-green-600 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Services Section */}
+      {/* Portfolio Section - Enhanced */}
       <motion.section
         className="py-20 px-8 bg-gray-900"
         initial="hidden"
@@ -105,37 +105,58 @@ export default function Home() {
         variants={sectionVariants}
       >
         <motion.h2 className="text-4xl font-bold text-center mb-12" variants={itemVariants}>
-          Sunduğumuz Web Çözümleri
+          Öne Çıkan Projelerimiz
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          <motion.div
-            className="bg-gray-800 rounded-lg shadow-xl overflow-hidden p-6"
-            variants={itemVariants}
-            whileHover={{ scale: 1.03 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">Kurumsal Web Siteleri</h3>
-            <p className="text-gray-300">Şirketinizin dijital kimliğini en iyi şekilde yansıtan profesyonel siteler.</p>
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div className="h-48 bg-gray-700 flex items-center justify-center text-gray-400 text-2xl font-bold">
+                {/* Placeholder for Project Image */}
+                <img src={`https://via.placeholder.com/400x200?text=Proje+${i}+Görseli`} alt={`Proje ${i}`} className="w-full h-full object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Proje Adı {i}</h3>
+                <p className="text-gray-300 mb-4">
+                  Bu proje, [teknoloji 1], [teknoloji 2] ve [teknoloji 3] kullanılarak geliştirilmiştir. Detaylı açıklama burada yer alacak ve projenin işinize nasıl değer kattığı vurgulanacaktır.
+                </p>
+                <a href="#" className="text-yellow-400 hover:underline">
+                  Detayları Gör &rarr;
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Testimonials Section */}
+      <motion.section
+        className="py-20 px-8 bg-gray-800 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
+        <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
+          Müşterilerimiz Ne Diyor?
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <motion.div className="p-6 bg-gray-700 rounded-lg shadow-lg" variants={itemVariants}>
+            <p className="text-lg italic text-gray-200 mb-4">"Harika bir ekip! Web sitemizi kısa sürede ve beklediğimizden çok daha iyi bir kalitede teslim ettiler. Kesinlikle tavsiye ederim."</p>
+            <p className="text-yellow-400 font-bold">- Memnun Müşteri 1</p>
           </motion.div>
-          <motion.div
-            className="bg-gray-800 rounded-lg shadow-xl overflow-hidden p-6"
-            variants={itemVariants}
-            whileHover={{ scale: 1.03 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">E-Ticaret Siteleri</h3>
-            <p className="text-gray-300">Ürünlerinizi kolayca satabileceğiniz, güvenli ve kullanıcı dostu e-ticaret platformları.</p>
-          </motion.div>
-          <motion.div
-            className="bg-gray-800 rounded-lg shadow-xl overflow-hidden p-6"
-            variants={itemVariants}
-            whileHover={{ scale: 1.03 }}
-          >
-            <h3 className="text-2xl font-bold mb-2">Kişisel Bloglar & Portföyler</h3>
-            <p className="text-gray-300">Bireysel markanızı veya çalışmalarınızı sergileyeceğiniz etkileyici platformlar.</p>
+          <motion.div className="p-6 bg-gray-700 rounded-lg shadow-lg" variants={itemVariants}>
+            <p className="text-lg italic text-gray-200 mb-4">"Uygun fiyata bu kadar profesyonel bir hizmet alacağımı düşünmezdim. İletişim harikaydı ve her adımda destek oldular."</p>
+            <p className="text-yellow-400 font-bold">- Memnun Müşteri 2</p>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* Call to Action for WhatsApp */}
+      {/* Call to Action for WhatsApp - Bottom */}
       <motion.section
         className="py-20 px-8 bg-gradient-to-br from-blue-500 to-purple-600 text-center"
         initial="hidden"
@@ -150,7 +171,7 @@ export default function Home() {
           Hayalinizdeki web sitesine uygun fiyatlarla sahip olmak için bize WhatsApp üzerinden ulaşın.
         </motion.p>
         <motion.a
-          href="https://wa.me/905551234567?text=Merhaba,%20uygun%20fiyatlı%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
+          href="https://wa.me/905453809828?text=Merhaba,%20uygun%20fiyatlı%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum."
           target="_blank"
           rel="noopener noreferrer"
           className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-yellow-300 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
