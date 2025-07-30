@@ -16,41 +16,65 @@ const itemVariants = {
 const testimonials = [
   {
     id: 1,
-    text: "3 günde teslim etti, kullanıcı arayüzü harikaydı.",
-    author: "Ahmet K.",
+    text: "3 günde teslim etti, kullanıcı arayüzü harikaydı. Beklentilerimin çok ötesinde bir iş çıkardı.",
+    author: "Ahmet K. - E-ticaret Girişimcisi",
   },
   {
     id: 2,
-    text: "Proje sürecinde iletişim çok güçlüydü, kesinlikle tavsiye ediyorum.",
-    author: "Merve Y.",
+    text: "Proje sürecinde iletişim çok güçlüydü, her adımda şeffaflık ve profesyonellik hissettim. Kesinlikle tavsiye ediyorum.",
+    author: "Merve Y. - Kurumsal Danışman",
   },
   {
     id: 3,
-    text: "İşimi büyütmek için harika bir web sitesi inşa etti. Herkese öneriyorum, pişman olmazsınız!",
-    author: "Ayşe D.",
+    text: "İşimi büyütmek için harika bir web sitesi inşa etti. Dönüşüm oranlarım gözle görülür şekilde arttı. Herkese öneriyorum, pişman olmazsınız!",
+    author: "Ayşe D. - Dijital Pazarlama Uzmanı",
+  },
+  {
+    id: 4,
+    text: "Yapay zeka entegrasyonu konusunda gerçekten uzmanlar. Karmaşık fikirlerimi kısa sürede gerçeğe dönüştürdüler.",
+    author: "Can B. - Teknoloji Lideri",
+  },
+  {
+    id: 5,
+    text: "Mobil uygulamamız beklediğimizden çok daha hızlı ve sorunsuz bir şekilde geliştirildi. Kullanıcı deneyimi mükemmel.",
+    author: "Deniz E. - Startup Kurucusu",
   },
 ];
 
 const projects = [
   {
     id: 1,
-    name: "Kürşat App",
-    description: "Türk dünyasına yönelik sosyal medya platformu inşa ettim – 50K+ aktif kullanıcıya ulaştırdım.",
+    name: "Kürşat App - Sosyal Medya Platformu",
+    description: "Türk dünyasına yönelik yenilikçi bir sosyal medya platformu inşa ettim. 50.000'den fazla aktif kullanıcıya ulaşarak topluluk etkileşimini zirveye taşıdım.",
     image: "https://via.placeholder.com/600x400?text=Kürşat+App",
     link: "#",
   },
   {
     id: 2,
-    name: "Lusid AI",
-    description: "Rüya ve günlük analizi yapan GPT destekli mobil uygulama geliştirdim. Yapay zeka gücünü parmaklarınızın ucuna getiriyorum.",
+    name: "Lusid AI - Yapay Zeka Destekli Analiz",
+    description: "Rüya ve günlük analizi yapan, GPT destekli çığır açan bir mobil uygulama geliştirdim. Kullanıcıların içgörülerini derinleştiriyorum.",
     image: "https://via.placeholder.com/600x400?text=Lusid+AI",
     link: "#",
   },
   {
     id: 3,
-    name: "Kurumsal B2B Proje",
-    description: "Önemli bir firmaya özel API ve mobil entegrasyon çözümleri teslim ettim. İş süreçlerini optimize ediyorum.",
-    image: "https://via.placeholder.com/600x400?text=Kurumsal+B2B",
+    name: "Global E-ticaret Entegrasyonları",
+    description: "Uluslararası bir e-ticaret devi için karmaşık API ve mobil entegrasyon çözümleri teslim ettim. Satış süreçlerini global ölçekte optimize ediyorum.",
+    image: "https://via.placeholder.com/600x400?text=Global+E-ticaret",
+    link: "#",
+  },
+  {
+    id: 4,
+    name: "Akıllı Şehir Otomasyon Sistemi",
+    description: "Büyük bir şehir için akıllı trafik ve enerji yönetimi otomasyon sistemi kurdum. Şehir yaşamını daha verimli hale getiriyorum.",
+    image: "https://via.placeholder.com/600x400?text=Akıllı+Şehir",
+    link: "#",
+  },
+  {
+    id: 5,
+    name: "Sağlık Teknolojileri Platformu",
+    description: "Hasta takibi ve randevu yönetimi için güvenli ve kullanıcı dostu bir sağlık teknolojileri platformu geliştirdim. Sağlık hizmetlerini dijitalleştiriyorum.",
+    image: "https://via.placeholder.com/600x400?text=Sağlık+Teknolojileri",
     link: "#",
   },
 ];
@@ -277,7 +301,7 @@ export default function Home() {
         </div>
         {/* Scroll Down Indicator */}
         <motion.div
-          className="absolute bottom-8 left-0 right-0 mx-auto flex flex-col items-center text-gray-400 w-fit"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
