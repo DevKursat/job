@@ -16,12 +16,12 @@ const itemVariants = {
 const testimonials = [
   {
     id: 1,
-    text: "3 günde teslim etti, UI harikaydı.",
+    text: "3 günde teslim etti, kullanıcı arayüzü harikaydı.",
     author: "Ahmet K.",
   },
   {
     id: 2,
-    text: "Proje sürecinde iletişim çok güçlüydü, kesinlikle öneriyorum.",
+    text: "Proje sürecinde iletişim çok güçlüydü, kesinlikle tavsiye ediyorum.",
     author: "Merve Y.",
   },
   {
@@ -58,22 +58,22 @@ const projects = [
 const services = [
   {
     id: 1,
-    title: "Mobil Uygulama Geliştiriyorum",
+    title: "Mobil Uygulama Geliştirme",
     description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
   },
   {
     id: 2,
-    title: "Web Sitesi Tasarlıyorum",
+    title: "Web Sitesi Tasarımı",
     description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
   },
   {
     id: 3,
-    title: "Yapay Zeka Çözümleri Üretiyorum",
+    title: "Yapay Zeka Çözümleri",
     description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
   },
   {
     id: 4,
-    title: "Otomasyon Sistemleri Kuruyorum",
+    title: "Otomasyon Sistemleri",
     description: "7 günlük teslimat ve UI/UX desteği sağlıyorum.",
   },
 ];
@@ -87,7 +87,6 @@ export default function Home() {
   const [currentRotatingText, setCurrentRotatingText] = useState(0);
 
   const heroRef = useRef(null);
-  // Parallax effect removed as per feedback
 
   useEffect(() => {
     const testimonialTimer = setInterval(() => {
@@ -115,13 +114,18 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
+    <div className="min-h-screen bg-gray-950 text-white font-sans relative">
+      {/* Matrix Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <canvas id="matrixCanvas" className="w-full h-full"></canvas>
+      </div>
+
       {/* Sticky CTA Button */}
       <motion.a
         href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-green-700 transition-colors duration-300"
+        className="fixed bottom-6 right-6 bg-turquoise-500 text-gray-900 p-4 rounded-full shadow-xl z-50 flex items-center justify-center text-xl font-bold hover:bg-turquoise-600 transition-colors duration-300"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 2 }}
@@ -136,7 +140,7 @@ export default function Home() {
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-purple-600 to-blue-500 overflow-hidden"
+        className="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-gray-900 to-gray-800 z-10"
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
@@ -155,24 +159,24 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="text-yellow-300 inline-block"
+                className="text-turquoise-400 inline-block"
               >
                 {rotatingTexts[currentRotatingText]}
               </motion.span>
             </AnimatePresence>
-            <br />Projelerinizi 3 Günde Teslim Ediyorum
+            <br />Çözümlerinizi 3 Günde Teslim Ediyorum
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl mb-8 text-gray-200"
             variants={itemVariants}
           >
-            İşinizi büyütmek için kusursuz dijital çözümler geliştiriyorum.
+            İşletmenizin dijital dönüşümünü hızlandırıyor, kusursuz ve yenilikçi çözümler geliştiriyorum.
           </motion.p>
           <motion.a
             href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-green-600 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
+            className="bg-turquoise-500 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-turquoise-600 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -183,55 +187,11 @@ export default function Home() {
             Hemen Projeni Başlat
           </motion.a>
         </div>
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Simple animated background elements */}
-          <motion.div
-            className="absolute w-48 h-48 bg-white bg-opacity-10 rounded-full -top-10 -left-10"
-            animate={{ x: 100, y: 100, rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute w-64 h-64 bg-white bg-opacity-10 rounded-full -bottom-20 -right-20"
-            animate={{ x: -100, y: -100, rotate: -360 }}
-            transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
-          />
-        </div>
-      </motion.section>
-
-      {/* About Section */}
-      <motion.section
-        className="py-20 px-8 bg-gray-800 text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-      >
-        <motion.h2 className="text-4xl font-bold mb-8" variants={itemVariants}>
-          Hakkımda
-        </motion.h2>
-        <motion.div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8" variants={itemVariants}>
-          <div className="md:w-1/3">
-            <img
-              src="https://via.placeholder.com/200x200?text=Kürşat+Fotoğrafı"
-              alt="Kürşat'ın Fotoğrafı"
-              className="rounded-full w-48 h-48 object-cover mx-auto mb-4 md:mb-0"
-              loading="lazy"
-            />
-          </div>
-          <div className="md:w-2/3 text-left">
-            <p className="text-lg text-gray-300 mb-4">
-              Merhaba, ben Kürşat. 20 yaşında, tutkulu bir girişimci yazılımcıyım. Web, mobil ve yapay zeka projeleri geliştirerek işletmelerin dijital dönüşümünü hızlandırıyorum. Her projede yenilikçi çözümler sunuyor, müşteri memnuniyetini en üst seviyede tutuyorum.
-            </p>
-            <p className="text-lg text-gray-300">
-              Hızlı teslimat, uygun fiyat ve kusursuz kullanıcı deneyimi odaklı çalışıyorum. Projelerinizi hayata geçirmek için buradayım.
-            </p>
-          </div>
-        </motion.div>
       </motion.section>
 
       {/* Service Cards Slider */}
       <motion.section
-        className="py-20 px-8 bg-gray-900 text-center"
+        className="py-20 px-8 bg-gray-900 text-center z-10 relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -258,7 +218,7 @@ export default function Home() {
             <button
               key={idx}
               onClick={() => setCurrentService(idx)}
-              className={`w-4 h-4 rounded-full ${currentService === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+              className={`w-4 h-4 rounded-full ${currentService === idx ? 'bg-turquoise-400' : 'bg-gray-600'} transition-colors duration-300`}
             />
           ))}
         </div>
@@ -266,7 +226,7 @@ export default function Home() {
 
       {/* Project Showcase Slider */}
       <motion.section
-        className="py-20 px-8 bg-gray-800"
+        className="py-20 px-8 bg-gray-800 z-10 relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -292,7 +252,7 @@ export default function Home() {
               <p className="text-gray-300 mb-4">
                 {projects[currentProject].description}
               </p>
-              <a href={projects[currentProject].link} className="text-yellow-400 hover:underline">
+              <a href={projects[currentProject].link} className="text-turquoise-400 hover:underline">
                 Detayları Görüntülüyorum &rarr;
               </a>
             </div>
@@ -303,7 +263,7 @@ export default function Home() {
             <button
               key={idx}
               onClick={() => setCurrentProject(idx)}
-              className={`w-4 h-4 rounded-full ${currentProject === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+              className={`w-4 h-4 rounded-full ${currentProject === idx ? 'bg-turquoise-400' : 'bg-gray-600'} transition-colors duration-300`}
             />
           ))}
         </div>
@@ -311,7 +271,7 @@ export default function Home() {
 
       {/* Testimonials Section - Auto-rotate */}
       <motion.section
-        className="py-20 px-8 bg-gray-900 text-center"
+        className="py-20 px-8 bg-gray-900 text-center z-10 relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -330,7 +290,7 @@ export default function Home() {
             className="max-w-2xl mx-auto p-6 bg-gray-700 rounded-lg shadow-lg"
           >
             <p className="text-lg italic text-gray-200 mb-4">"{testimonials[currentTestimonial].text}"</p>
-            <p className="text-yellow-400 font-bold">- {testimonials[currentTestimonial].author}</p>
+            <p className="text-turquoise-400 font-bold">- {testimonials[currentTestimonial].author}</p>
           </motion.div>
         </AnimatePresence>
         <div className="flex justify-center mt-8 space-x-4">
@@ -338,7 +298,7 @@ export default function Home() {
             <button
               key={idx}
               onClick={() => setCurrentTestimonial(idx)}
-              className={`w-4 h-4 rounded-full ${currentTestimonial === idx ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+              className={`w-4 h-4 rounded-full ${currentTestimonial === idx ? 'bg-turquoise-400' : 'bg-gray-600'} transition-colors duration-300`}
             />
           ))}
         </div>
@@ -346,7 +306,7 @@ export default function Home() {
 
       {/* Call to Action for WhatsApp - Bottom */}
       <motion.section
-        className="py-20 px-8 bg-gradient-to-br from-blue-500 to-purple-600 text-center"
+        className="py-20 px-8 bg-gradient-to-br from-turquoise-500 to-turquoise-600 text-center z-10 relative"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -362,7 +322,7 @@ export default function Home() {
           href="https://wa.me/905453809828?text=Merhaba,%20projem%20hakkında%20bilgi%20almak%20istiyorum."
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-yellow-300 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
+          className="bg-turquoise-400 text-gray-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-turquoise-500 transition-colors duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs"
           variants={itemVariants}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -375,8 +335,23 @@ export default function Home() {
       </motion.section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-950 text-center text-gray-500 text-sm">
+      <footer className="py-8 bg-gray-950 text-center text-gray-500 text-sm z-10 relative">
         <p>&copy; {new Date().getFullYear()} Web Çözümleri. Tüm Hakları Saklıdır.</p>
+        <div className="mt-4 flex justify-center space-x-6">
+          <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-turquoise-400 transition-colors duration-300">
+            {/* LinkedIn Icon */}
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-turquoise-400 transition-colors duration-300">
+            {/* GitHub Icon */}
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.903.165 1.23-.395 1.23-.872 0-.432-.015-1.58-.025-3.109-3.338.724-4.042-1.61-4.042-1.61-.542-1.371-1.328-1.732-1.328-1.732-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.23 1.838 1.23 1.07 1.835 2.809 1.305 3.49.997.107-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.221-.124-.3-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.876.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.027 3.286-.012.392.269.904.97.746 4.765-1.589 8.203-6.086 8.203-11.385c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          {/* Add more social media icons as needed */}
+        </div>
       </footer>
     </div>
   );
