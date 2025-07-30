@@ -113,6 +113,63 @@ export default function Home() {
     };
   }, []);
 
+  // Matrix Effect JavaScript
+  useEffect(() => {
+    const canvas = document.getElementById('matrixCanvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()_+-=[]{};':\"|,.<>/?";
+    const font_size = 10;
+    const columns = canvas.width / font_size;
+    const drops: number[] = [];
+
+    for (let x = 0; x < columns; x++) {
+      drops[x] = 1;
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00FF41"; // Green text
+      ctx.font = font_size + "px arial";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    const interval = setInterval(draw, 35);
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const newColumns = canvas.width / font_size;
+      for (let x = 0; x < newColumns; x++) {
+        if (!drops[x]) drops[x] = 1;
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-950 text-white font-sans relative">
       {/* Matrix Background */}
@@ -140,7 +197,7 @@ export default function Home() {
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-gray-900 to-gray-800 z-10"
+        className="relative h-screen flex items-center justify-center text-center bg-black bg-opacity-70 z-10"
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
@@ -249,7 +306,7 @@ export default function Home() {
             </div>
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-2">{projects[currentProject].name}</h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-300">
                 {projects[currentProject].description}
               </p>
               <a href={projects[currentProject].link} className="text-turquoise-400 hover:underline">
